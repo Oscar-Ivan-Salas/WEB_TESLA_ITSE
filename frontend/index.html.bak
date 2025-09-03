@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="es-PE">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TESLA ELECTRICIDAD Y AUTOMATIZACIÓN S.A.C – Energía inteligente para Huancayo</title>
+  <meta name="description" content="Expertos en ITSE, pozos de tierra, mantenimiento eléctrico y sistemas contra incendios. Cotiza 24/7 con TeslaBot. Servicio en Huancayo y alrededores." />
+  <meta name="robots" content="index,follow" />
+  <link rel="canonical" href="https://www.tesla-electricidad.pe/" />
+  <link rel="icon" href="/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <script>window.TESLA_API='';</script>
+  <style>
+    :root{--brand:#003366;--brand2:#0066cc;--accent:#ff0000;--ink:#333;--muted:#667085;--bg:#f0f4f8;--shadow:0 10px 30px rgba(0,51,102,.12);--r:20px}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:Poppins,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;color:var(--ink);background:#fff}
+    a{color:inherit;text-decoration:none}
+    .container{max-width:1200px;margin:auto;padding:0 20px}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    header{position:sticky;top:0;background:#001a33;color:#fff;z-index:50}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:12px 0}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:700}
+    .brand span{display:inline-flex;width:36px;height:36px;border-radius:50%;align-items:center;justify-content:center;background:#25d366}
+    .nav a.btn{background:var(--accent);padding:10px 18px;border-radius:999px;font-weight:700}
+    .hero{background:linear-gradient(135deg,rgba(0,51,102,.92),rgba(0,64,128,.9) 50%,rgba(0,102,204,.92));color:#fff}
+    .hero-inner{padding:96px 0;text-align:center}
+    .hero h1{font-size:clamp(2rem,4vw,3.2rem);margin:0 0 12px}
+    .hero p{font-size:clamp(1rem,2.2vw,1.2rem);opacity:.95;margin:0 0 22px}
+    .cta{background:var(--accent);color:#fff;padding:14px 28px;border-radius:999px;display:inline-block;font-weight:800}
+    .cta:hover{transform:translateY(-2px);box-shadow:0 10px 20px rgba(255,0,0,.3)}
+    .statusbar{display:none;text-align:center;font-weight:600;padding:8px 10px}
+    .dashboard{background:var(--bg);padding:70px 0}
+    .section-title{color:var(--brand);text-align:center;font-size:clamp(1.8rem,3vw,2.2rem);margin:0 0 8px}
+    .section-sub{color:#475467;text-align:center;max-width:720px;margin:0 auto 32px}
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:26px}
+    .card{background:#fff;border-radius:var(--r);padding:22px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 14px;color:var(--brand)}
+    .chart-wrap{position:relative;height:280px;display:flex;flex-direction:column}
+    .chart{flex:1;display:flex;align-items:flex-end;gap:14px;border-left:2px solid #e0e0e0;border-bottom:2px solid #e0e0e0;padding:10px}
+    .mbar{width:36px;border-radius:8px 8px 0 0;background:linear-gradient(180deg,#4f9ef6,#1e67c7);position:relative}
+    .mbar .tip{position:absolute;left:50%;transform:translateX(-50%);top:-30px;background:#111;color:#fff;padding:4px 8px;border-radius:6px;font-size:.85rem;opacity:0;transition:opacity .2s}
+    .mbar:hover .tip{opacity:1}
+    .months{display:flex;justify-content:space-between;font-weight:600;color:#475467}
+    .chart2{flex:1;display:flex;align-items:flex-end;gap:20px;border-left:2px solid #e0e0e0;border-bottom:2px solid #e0e0e0;padding:10px}
+    .bar{width:44px;border-radius:8px 8px 0 0;position:relative}
+    .bar[data-service="itse"]{background:linear-gradient(180deg,#007bff,#0056b3)}
+    .bar[data-service="pozo"]{background:linear-gradient(180deg,#28a745,#1e7e34)}
+    .bar[data-service="mant"]{background:linear-gradient(180deg,#ffc107,#d39e00)}
+    .bar[data-service="inc"]{background:linear-gradient(180deg,#dc3545,#b02a37)}
+    .bar .tip{position:absolute;left:50%;transform:translateX(-50%);top:-30px;background:#111;color:#fff;padding:4px 8px;border-radius:6px;font-size:.85rem;opacity:0;transition:opacity .2s}
+    .bar:hover .tip{opacity:1}
+    .kpi{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center}
+    .kpi .val{font-size:1.9rem;font-weight:800;color:var(--brand)}
+    .kpi .lbl{color:#667085}
+    .services{padding:70px 0}
+    .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:26px}
+    .service{background:#f8fafc;border-radius:16px;padding:20px;border:2px solid transparent;transition:transform .2s,border-color .2s;display:flex;flex-direction:column}
+    .service:hover{transform:translateY(-6px);border-color:var(--brand);box-shadow:0 14px 28px rgba(0,51,102,.18)}
+    .gallery{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:8px;margin:0 auto 14px;width:240px;height:200px}
+    .gallery img{width:100%;height:100%;object-fit:cover;border-radius:10px;border:2px solid var(--brand)}
+    .gallery img:first-child{grid-row:1/3}
+    .service h3{margin:6px 0 8px;color:var(--brand);font-size:1.1rem}
+    .service p{color:#475467;margin:0}
+    .chat-sec{background:linear-gradient(135deg,rgba(0,51,102,.96),rgba(0,64,128,.96));padding:70px 0;color:#fff}
+    .chat-wrap{max-width:820px;margin:auto;background:#fff;border-radius:20px;box-shadow:0 20px 40px rgba(0,0,0,.3);overflow:hidden;display:flex;flex-direction:column}
+    .chat-h{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;padding:16px 18px;display:flex;gap:12px;align-items:center}
+    .chat-h .avatar{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:#25d366}
+    .msgs{height:380px;overflow-y:auto;padding:16px;background:#f8f9fa}
+    .msg{display:flex;gap:10px;margin:0 0 14px}
+    .msg .bubble{background:#fff;padding:12px;border-radius:12px;box-shadow:0 2px 10px rgba(0,0,0,.08);max-width:80%}
+    .msg.bot .icon{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--brand);color:#fff}
+    .msg.user{justify-content:flex-end}
+    .msg.user .bubble{background:#25d366;color:#fff;border-radius:12px 12px 4px 12px}
+    .chat-input{padding:14px;border-top:1px solid #eee;background:#fff}
+    .chat-input .row{display:flex;gap:10px;align-items:center}
+    .chat-input input{flex:1;padding:12px;border:2px solid #e9ecef;border-radius:24px;font-size:1rem}
+    .chat-input button{width:46px;height:46px;border:0;border-radius:50%;background:#25d366;color:#fff;cursor:pointer}
+    .chat-quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+    .chip{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#fff;border:0;padding:10px 12px;border-radius:10px;cursor:pointer;font-weight:600}
+    .chat-external{text-align:center;margin-top:10px}
+    .chat-external a{margin:4px;display:inline-block;padding:10px 14px;border-radius:20px;color:#fff;font-weight:700}
+    .wa{background:#25d366}
+    .tg{background:#0088cc}
+    .social-sec{padding:60px 0;background:#f8fafc}
+    .social-grid{display:flex;flex-wrap:wrap;gap:20px;justify-content:center}
+    .social-card{background:#fff;border:2px solid var(--brand);border-radius:12px;overflow:hidden;width:360px;box-shadow:0 6px 18px rgba(0,0,0,.1)}
+    .social-card iframe{width:100%;height:200px;border:0}
+    .social-card h3{text-align:center;color:var(--brand);padding:10px 0;margin:0}
+    .contact{background:linear-gradient(135deg,rgba(0,51,102,.92),rgba(0,64,128,.9),rgba(0,102,204,.92));color:#fff;padding:70px 0}
+    .form{max-width:640px;margin:auto;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);padding:24px;border-radius:16px}
+    label{font-weight:600;margin-bottom:6px;display:block}
+    input,select,textarea{width:100%;padding:12px;border:0;border-radius:10px;background:rgba(255,255,255,.95)}
+    textarea{min-height:120px;resize:vertical}
+    .submit{background:var(--accent);color:#fff;width:100%;padding:14px;border:0;border-radius:999px;font-weight:700;cursor:pointer}
+    footer{background:#001a33;color:#fff;padding:56px 0 20px}
+    .fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:26px;margin-bottom:24px}
+    footer h3{color:var(--accent);margin:0 0 10px}
+    footer a{opacity:.85}
+    .foot{opacity:.7;text-align:center;padding-top:16px;border-top:1px solid rgba(255,255,255,.1)}
+    .wa-float{position:fixed;right:18px;bottom:18px;width:56px;height:56px;border-radius:50%;display:grid;place-items:center;background:#25d366;color:#fff;text-decoration:none;box-shadow:0 8px 24px rgba(37,211,102,.5);z-index:60}
+    .wa-float:hover{transform:scale(1.05)}
+    @media (max-width:768px){.kpi{grid-template-columns:1fr 1fr 1fr}.gallery{width:100%;height:220px}}
+  </style>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"LocalBusiness","name":"TESLA ELECTRICIDAD Y AUTOMATIZACIÓN S.A.C.","telephone":"+51 906 315 961","email":"contacto@tesla-electricidad.pe","address":{"@type":"PostalAddress","streetAddress":"Jr. Los Narcisos Mz H Lote 4, Urb. San Carlos","addressLocality":"Huancayo","addressRegion":"Junín","addressCountry":"PE"},"areaServed":"Huancayo","url":"https://www.tesla-electricidad.pe/"}
+  </script>
+</head>
+
+<script>
+    (function () {
+      const API_BASE = (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+        ? 'http://127.0.0.1:8000'
+        : ''; // en docker/nginx, /api ya proxya
+  
+      // === Dashboard: carga métricas reales ===
+      async function loadMetrics() {
+        try {
+          const r = await fetch(API_BASE + '/api/metrics');
+          if (!r.ok) throw 0;
+          const m = await r.json();
+          const labels = ['ITSE','Pozo','Mant.','Inc.'];
+          const bars = document.querySelectorAll('.chart .bar');
+          const vals = [m.itse||80, m.pozo||65, m.mant||90, m.inc||50];
+          bars.forEach((b,i) => { b.style.height = Math.max(5, Math.min(100, vals[i])) + '%'; });
+        } catch(e) {
+          // fallback: deja tus valores actuales
+        }
+      }
+  
+      // === Chat mínimo: si añades un input, lo usamos; si no, no rompe nada
+      async function askBot(text) {
+        const r = await fetch(API_BASE + '/api/chat', {
+          method: 'POST',
+          headers: {'Content-Type':'application/json'},
+          body: JSON.stringify({ message: text, use_ai: true })
+        });
+        if (!r.ok) throw new Error('chat error');
+        return r.json();
+      }
+  
+      function mountChatInput() {
+        const box = document.querySelector('.chat-window');
+        if (!box) return;
+        const wrap = document.createElement('div');
+        wrap.style.marginTop = '12px';
+        wrap.innerHTML = `
+          <div style="display:flex; gap:8px;">
+            <input id="chat-input" placeholder="Escribe aquí..." style="flex:1; padding:10px; border:1px solid #ddd; border-radius:8px;">
+            <button id="chat-send" style="padding:10px 14px; border:none; border-radius:8px; background:#25d366; color:white; font-weight:600;">Enviar</button>
+          </div>
+          <p style="font-size:12px; color:#666; margin-top:6px;">El bot da precios referenciales y propone agendar visita.</p>
+        `;
+        box.appendChild(wrap);
+  
+        const input = wrap.querySelector('#chat-input');
+        const btn = wrap.querySelector('#chat-send');
+        const print = (role, msg) => {
+          const p = document.createElement('p');
+          p.innerHTML = `<strong>${role}:</strong> ${msg}`;
+          box.appendChild(p);
+          box.scrollTop = box.scrollHeight;
+        };
+        btn.addEventListener('click', async () => {
+          const t = (input.value||'').trim();
+          if (!t) return;
+          print('Usuario', t);
+          input.value = '';
+          try {
+            const data = await askBot(t);
+            print('TeslaBot', data.reply);
+          } catch(e) {
+            print('TeslaBot', 'Ups, no pude responder ahora. Intenta otra vez.');
+          }
+        });
+      }
+  
+      document.addEventListener('DOMContentLoaded', () => {
+        loadMetrics();
+        mountChatInput();
+      });
+    })();
+  </script>
+  
+<body>
+  <a href="#main" class="sr-only">Saltar al contenido</a>
+  <header role="banner">
+    <div class="container nav" aria-label="Barra de navegación">
+      <div class="brand"><span>⚡</span> TESLA Electricidad</div>
+      <nav aria-label="Enlaces principales">
+        <a href="#servicios">Servicios</a>
+        &nbsp;·&nbsp;<a href="#dashboard">Resultados</a>
+        &nbsp;·&nbsp;<a href="#contacto">Contacto</a>
+        &nbsp;·&nbsp;<a class="btn" href="#contacto" aria-label="Cotizar ahora">Cotizar ahora</a>
+      </nav>
+    </div>
+  </header>
+
+  <div id="backendStatus" class="statusbar">Conectando al backend…</div>
+
+  <main id="main">
+    <section class="hero"><div class="container hero-inner">
+      <h1>Expertos en Seguridad Eléctrica y Certificación ITSE</h1>
+      <p>Garantizamos la operatividad y legalidad de tu negocio en Huancayo.</p>
+      <a class="cta" href="#contacto">Cotizar ahora ⚡</a>
+      <div id="demoBadge" style="margin-top:10px;font-weight:600;opacity:.9">🔌 <span id="statusText">Conectando backend…</span></div>
+    </div></section>
+
+    <section class="dashboard" id="dashboard"><div class="container">
+      <h2 class="section-title">Resultados 2025</h2>
+      <p class="section-sub">Datos simulados de demo. Al conectar el backend, los KPI serán reales.</p>
+      <div class="grid" aria-live="polite">
+        <article class="card">
+          <h3>Clientes por mes (2025)</h3>
+          <div class="chart-wrap">
+            <div class="chart" id="clientsChart" role="img" aria-label="Barras por mes"></div>
+            <div class="months"><span>E</span><span>F</span><span>M</span><span>A</span><span>M</span><span>J</span><span>J</span><span>A</span><span>S</span><span>O</span><span>N</span><span>D</span></div>
+          </div>
+        </article>
+        <article class="card">
+          <h3>Servicios realizados (<span id="monthNameKpi">Agosto</span>)</h3>
+          <div class="chart-wrap">
+            <div class="chart2" id="serviceChart" aria-describedby="chartNote" role="img" aria-label="Barras por tipo de servicio"></div>
+            <p id="chartNote" class="sr-only">Comparación de ITSE, Pozos, Mantenimiento e Incendios</p>
+          </div>
+          <div class="kpi" style="margin-top:14px">
+            <div><div class="val" id="kpiClients">0</div><div class="lbl">Nuevos clientes</div></div>
+            <div><div class="val" id="kpiServices">0</div><div class="lbl">Servicios totales</div></div>
+            <div><div class="val" id="kpiCSAT">0%</div><div class="lbl">Satisfacción</div></div>
+          </div>
+          <div style="margin-top:8px;color:#9aa4b2;font-size:.9rem">Tip: haz clic en un mes del gráfico de clientes para ver el detalle.</div>
+        </article>
+      </div>
+    </div></section>
+
+    <section class="services" id="servicios"><div class="container">
+      <h2 class="section-title">Nuestros servicios especializados</h2>
+      <div class="cards">
+        <article class="service">
+          <div class="gallery">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1543286386-713bdd548da4?w=300&h=400&fit=crop" alt="Inspector revisando instalaciones para ITSE" />
+            <img loading="lazy" src="https://images.unsplash.com/photo-1554494541-34d7d1a25883?w=200&h=200&fit=crop" alt="Checklist de seguridad" />
+            <img loading="lazy" src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=200&h=200&fit=crop" alt="Equipo técnico con casco y planos" />
+          </div>
+          <h3>📋 Certificado ITSE</h3>
+          <p>Gestión integral de la Inspección Técnica de Seguridad en Edificaciones. Te acompañamos desde el diagnóstico hasta la obtención del certificado.</p>
+        </article>
+        <article class="service">
+          <div class="gallery">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?w=300&h=400&fit=crop" alt="Medición de pozo a tierra" />
+            <img loading="lazy" src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=200&h=200&fit=crop" alt="Multímetro y pinzas" />
+            <img loading="lazy" src="https://images.unsplash.com/photo-1601131498642-7208d13b4697?w=200&h=200&fit=crop" alt="Cableado de puesta a tierra" />
+          </div>
+          <h3>⚡ Pozo de Tierra</h3>
+          <p>Instalación y mantenimiento de sistemas de puesta a tierra conforme a CNE.</p>
+        </article>
+        <article class="service">
+          <div class="gallery">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=400&fit=crop" alt="Tablero eléctrico en mantenimiento" />
+            <img loading="lazy" src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?w=200&h=200&fit=crop" alt="Herramientas" />
+            <img loading="lazy" src="https://images.unsplash.com/photo-1579483324903-bdf25585c54c?w=200&h=200&fit=crop" alt="Ajuste de componentes" />
+          </div>
+          <h3>🔧 Mantenimiento Eléctrico</h3>
+          <p>Planes preventivos y correctivos para instalaciones comerciales e industriales.</p>
+        </article>
+        <article class="service">
+          <div class="gallery">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1561053913-5a7e6be95754?w=300&h=400&fit=crop" alt="Detectores de humo" />
+            <img loading="lazy" src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=200&h=200&fit=crop" alt="Alarma manual" />
+            <img loading="lazy" src="https://images.unsplash.com/photo-1609220136736-443140cffec6?w=200&h=200&fit=crop" alt="Gabinete contra incendios" />
+          </div>
+          <h3>🧯 Sistema Contra Incendios</h3>
+          <p>Diseño e instalación de detección y alarma de incendios según normativa.</p>
+        </article>
+        <article class="service">
+          <div class="gallery">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=300&h=400&fit=crop" alt="Tablero industrial" />
+            <img loading="lazy" src="https://images.unsplash.com/photo-1614757329973-9a3d49c69316?w=200&h=200&fit=crop" alt="Plano eléctrico" />
+            <img loading="lazy" src="https://images.unsplash.com/photo-1596043534923-a2c6b0394862?w=200&h=200&fit=crop" alt="Componentes de control" />
+          </div>
+          <h3>📊 Diseño de Tableros</h3>
+          <p>Tableros de control y distribución a medida.</p>
+        </article>
+        <article class="service">
+          <div class="gallery">
+            <img loading="lazy" src="https://images.unsplash.com/photo-1580920469275-fc7f52f43168?w=300&h=400&fit=crop" alt="Bobinas de cableado" />
+            <img loading="lazy" src="https://images.unsplash.com/photo-1617045483163-3e3a9a7a6e6e?w=200&h=200&fit=crop" alt="Interruptores" />
+            <img loading="lazy" src="https://images.unsplash.com/photo-1621905252472-e8ace315ad65?w=200&h=200&fit=crop" alt="Accesorios eléctricos" />
+          </div>
+          <h3>🛒 Venta de Suministros</h3>
+          <p>Materiales eléctricos de marcas líderes.</p>
+        </article>
+      </div>
+    </div></section>
+
+    <section class="chat-sec"><div class="container">
+      <h2 class="section-title" style="color:#fff">🤖 TeslaBot – Asistente inteligente 24/7</h2>
+      <p class="section-sub" style="color:rgba(255,255,255,.9)">Cotiza rápido y agenda una visita técnica.</p>
+      <div class="chat-wrap" aria-live="polite">
+        <div class="chat-h"><div class="avatar">🤖</div><div><strong>TeslaBot</strong><br/><span>🟢 En línea – Respuesta inmediata</span></div></div>
+        <div class="msgs" id="msgs">
+          <div class="msg bot"><div class="icon">⚡</div><div class="bubble">👋 ¡Hola! Soy <strong>TeslaBot</strong>. Dime tu servicio (ITSE, pozo de tierra, mantenimiento o incendios) y, si puedes, el rubro y área en m². Te doy un referencial y agendamos.</div></div>
+          <div class="msg bot"><div class="icon">🧭</div><div class="bubble">Atajos:</div></div>
+          <div class="msg bot"><div class="icon">➡️</div><div class="bubble"><div class="chat-quick">
+              <button class="chip" data-key="itse">📋 ITSE</button>
+              <button class="chip" data-key="pozo">⚡ Pozo Tierra</button>
+              <button class="chip" data-key="mantenimiento">🔧 Mantenimiento</button>
+              <button class="chip" data-key="incendios">🧯 Contra Incendios</button>
+          </div></div></div>
+        </div>
+        <div class="chat-input">
+          <div class="row">
+            <label for="chatIn" class="sr-only">Escribe tu mensaje</label>
+            <input id="chatIn" type="text" placeholder="Escribe tu mensaje…" />
+            <button id="sendBtn" aria-label="Enviar">📤</button>
+          </div>
+          <div class="chat-external">
+            <a class="wa" id="waCta" href="https://api.whatsapp.com/send?phone=51906315961" target="_blank" rel="noopener">💬 Continuar en WhatsApp</a>
+            <a class="tg" href="https://t.me/tu_usuario_bot" target="_blank" rel="noopener">📲 Telegram</a>
+          </div>
+        </div>
+      </div>
+    </div></section>
+
+    <section class="social-sec"><div class="container">
+      <h2 class="section-title">🎥 Síguenos en redes</h2>
+      <div class="social-grid">
+        <div class="social-card"><iframe src="https://www.tiktok.com/embed/v2/7337575298478228779" title="TikTok"></iframe><h3>TikTok</h3></div>
+        <div class="social-card"><iframe src="https://www.instagram.com/reel/C0rxeckIA/embed" title="Instagram"></iframe><h3>Instagram</h3></div>
+        <div class="social-card"><iframe src="https://www.facebook.com/plugins/video.php?href=https://www.facebook.com/watch/?v=123456" title="Facebook"></iframe><h3>Facebook</h3></div>
+      </div>
+    </div></section>
+
+    <section class="contact" id="contacto"><div class="container">
+      <h2 class="section-title" style="color:#fff">Solicita tu cotización</h2>
+      <form class="form" id="leadForm" action="#" method="POST" novalidate>
+        <div class="field"><label for="name">Nombre completo</label><input id="name" name="name" type="text" autocomplete="name" required /></div>
+        <div class="field"><label for="email">Correo electrónico</label><input id="email" name="email" type="email" autocomplete="email" required /></div>
+        <div class="field"><label for="phone">Teléfono / WhatsApp</label><input id="phone" name="phone" type="tel" inputmode="tel" placeholder="51 9xx xxx xxx" required /></div>
+        <div class="field"><label for="service">Servicio de interés</label>
+          <select id="service" name="service">
+            <option value="itse">Certificado ITSE</option>
+            <option value="pozo_tierra">Pozo de Tierra</option>
+            <option value="mantenimiento">Mantenimiento Eléctrico</option>
+            <option value="incendios">Sistema Contra Incendios</option>
+            <option value="tableros">Diseño de Tableros</option>
+            <option value="suministros">Venta de Suministros</option>
+            <option value="otro">Otro</option>
+          </select>
+        </div>
+        <div class="field"><label for="message">Mensaje</label><textarea id="message" name="message" required></textarea></div>
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+        <button class="submit" type="submit">Enviar cotización</button>
+        <p id="formMsg" role="status" aria-live="polite" style="margin-top:10px"></p>
+      </form>
+    </div></section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="fgrid">
+        <div><h3>Sobre nosotros</h3><p>TESLA ELECTRICIDAD Y AUTOMATIZACIÓN S.A.C. ofrece soluciones eléctricas seguras y eficientes para empresas y comercios en Huancayo y alrededores.</p></div>
+        <div><h3>Nuestros servicios</h3><p>
+          <a href="#servicios">Certificado ITSE</a><br />
+          <a href="#servicios">Pozos de Tierra</a><br />
+          <a href="#servicios">Mantenimiento Eléctrico</a><br />
+          <a href="#servicios">Sistemas Contra Incendios</a>
+        </p></div>
+        <div><h3>Contacto</h3><p>
+          Dirección: Jr. Los Narcisos Mz H Lote 4 – Urb. San Carlos, Huancayo, Perú<br />
+          WhatsApp: <a href="https://api.whatsapp.com/send?phone=51906315961" target="_blank" rel="noopener">+51 906 315 961</a><br />
+          Email: <a href="mailto:contacto@tesla-electricidad.pe">contacto@tesla-electricidad.pe</a>
+        </p></div>
+      </div>
+      <div class="foot">© 2025 TESLA ELECTRICIDAD Y AUTOMATIZACIÓN S.A.C. Todos los derechos reservados.</div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://api.whatsapp.com/send?phone=51906315961" target="_blank" rel="noopener" aria-label="Chatear por WhatsApp">✆</a>
+
+  <script>
+    const BASE_URL = (window.TESLA_API ?? '');
+    (async () => {
+      const bar = document.getElementById('backendStatus');
+      const txt = document.getElementById('statusText');
+      try{
+        const r = await fetch(BASE_URL + '/healthz', {mode:'cors'});
+        if(r.ok){bar.style.display='block';bar.style.background='#e7f6ed';bar.style.color='#065f46';bar.textContent='✅ Backend conectado';txt.textContent='Backend conectado';}
+        else {bar.style.display='block';bar.style.background='#fde2e1';bar.style.color='#7a271a';bar.textContent='❌ Backend no responde';}
+      } catch(e) {
+        bar.style.display='block'; bar.style.background='#fde2e1'; bar.style.color='#7a271a'; bar.textContent='❌ Backend no disponible';
+      }
+    })();
+
+    const monthNames=['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    const clientsByMonth=[5,6,8,7,8,10,12,15,16,18,20,22];
+    const monthlyData=[
+      {clients:5, satisfaction:92, services:{itse:2, pozo:3, mant:10, inc:1}},
+      {clients:6, satisfaction:93, services:{itse:3, pozo:4, mant:11, inc:2}},
+      {clients:8, satisfaction:94, services:{itse:4, pozo:5, mant:14, inc:2}},
+      {clients:7, satisfaction:95, services:{itse:5, pozo:5, mant:15, inc:3}},
+      {clients:8, satisfaction:95, services:{itse:6, pozo:3, mant:15, inc:4}},
+      {clients:10, satisfaction:96, services:{itse:7, pozo:6, mant:18, inc:5}},
+      {clients:12, satisfaction:97, services:{itse:8, pozo:7, mant:20, inc:7}},
+      {clients:15, satisfaction:98, services:{itse:9, pozo:8, mant:22, inc:8}},
+      {clients:16, satisfaction:98, services:{itse:10, pozo:8, mant:23, inc:8}},
+      {clients:18, satisfaction:98, services:{itse:11, pozo:9, mant:24, inc:9}},
+      {clients:20, satisfaction:99, services:{itse:12, pozo:10, mant:26, inc:10}},
+      {clients:22, satisfaction:99, services:{itse:13, pozo:10, mant:28, inc:11}}
+    ];
+    const clientsChart=document.getElementById('clientsChart'); const maxClients=Math.max(...clientsByMonth);
+    clientsByMonth.forEach((val,idx)=>{
+      const b=document.createElement('div'); b.className='mbar';
+      b.style.height=(val/maxClients*100)+'%'; b.title=monthNames[idx]+': '+val+' clientes';
+      b.innerHTML='<span class="tip">'+val+' clientes</span>';
+      b.addEventListener('click',()=>selectMonth(idx)); clientsChart.appendChild(b);
+    });
+    const serviceChart=document.getElementById('serviceChart');
+    function renderServicesFor(i){
+      serviceChart.innerHTML='';
+      const d=monthlyData[i];
+      const maxVal=Math.max(...Object.values(d.services));
+      Object.entries(d.services).forEach(([k,v])=>{
+        const bar=document.createElement('div'); bar.className='bar'; bar.dataset.service=k;
+        bar.style.height=(v/maxVal*100)+'%'; bar.innerHTML='<span class="tip">'+v+' servicios</span>'; serviceChart.appendChild(bar);
+      });
+      document.getElementById('monthNameKpi').textContent=monthNames[i];
+      animateNumber(document.getElementById('kpiClients'), d.clients);
+      animateNumber(document.getElementById('kpiServices'), Object.values(d.services).reduce((a,b)=>a+b,0));
+      animateNumber(document.getElementById('kpiCSAT'), d.satisfaction, 600, '%');
+    }
+    function animateNumber(el, to, duration=600, suffix=''){
+      const start=0; const t0=performance.now();
+      function step(t){const p=Math.min((t-t0)/duration,1); el.textContent=Math.round(start+(to-start)*p)+(suffix||''); if(p<1)requestAnimationFrame(step)}
+      requestAnimationFrame(step)
+    }
+    function selectMonth(i){renderServicesFor(i)} selectMonth(new Date().getMonth());
+
+    const msgs=document.getElementById('msgs'); const chatIn=document.getElementById('chatIn'); const sendBtn=document.getElementById('sendBtn');
+    function append(text, who='bot'){
+      const row=document.createElement('div'); row.className='msg '+(who==='user'?'user':'bot');
+      row.innerHTML= who==='user' ? `<div class="bubble">${text}</div>` : `<div class="icon">🤖</div><div class="bubble">${text}</div>`;
+      msgs.appendChild(row); msgs.scrollTop=msgs.scrollHeight;
+    }
+    function replyLocal(text){
+      const low=text.toLowerCase();
+      if(low.includes('itse')) return 'ITSE: Pago municipal aprox. S/ 218 y gestión desde S/ 300 (referencial). ¿Rubro y m²? Te agendo visita.';
+      if(low.includes('pozo')) return 'Pozo de tierra: S/ 1,500 – 2,500 (referencial). Depende del terreno. ¿Dirección para visita?';
+      if(low.includes('manten')) return 'Mantenimiento: plan a medida. Cuéntame el tamaño del local y equipos críticos.';
+      if(low.includes('incend')) return 'Contra incendios: diseño/detección/alarma. Costo depende del área y normativa. ¿Qué propiedad es?';
+      return 'Gracias. Déjanos tu nombre y número y un especialista te contactará.';
+    }
+    async function chatBackendOrLocal(text){
+      try{
+        const res = await fetch(BASE_URL + '/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:text, use_ai:true})});
+        if(res.ok){ const data = await res.json(); append(data.reply,'bot'); return; }
+      }catch(err){}
+      append(replyLocal(text),'bot');
+    }
+    document.querySelectorAll('.chip[data-key]').forEach(ch=>ch.addEventListener('click',()=>{
+      const k=ch.getAttribute('data-key');
+      const map={itse:'Quisiera cotizar un Certificado ITSE',pozo:'Necesito información sobre Pozos de Tierra',mantenimiento:'Me interesa el Mantenimiento Eléctrico',incendios:'Quiero saber más de Sistemas Contra Incendios'};
+      append(map[k],'user'); chatBackendOrLocal(map[k]);
+    }));
+    function send(){const v=chatIn.value.trim();if(!v)return;append(v,'user');chatIn.value='';chatBackendOrLocal(v)}
+    chatIn.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();send()}});
+    sendBtn.addEventListener('click',send);
+
+    const waCta = document.getElementById('waCta');
+    if(waCta){
+      waCta.addEventListener('click', ()=>{
+        const bubbles=[...document.querySelectorAll('#msgs .msg.user .bubble')].slice(-3).map(b=>b.textContent).join(' | ');
+        const url = new URL(waCta.href);
+        const baseMsg = 'Hola, vengo de la web y necesito una cotización. ';
+        url.searchParams.set('text', baseMsg + bubbles);
+        waCta.href = url.toString();
+      });
+    }
+
+    const form=document.getElementById('leadForm'); const formMsg=document.getElementById('formMsg');
+    form.addEventListener('submit',async(e)=>{
+      e.preventDefault(); formMsg.textContent='Enviando…';
+      const payload={
+        name:document.getElementById('name').value.trim(),
+        email:document.getElementById('email').value.trim(),
+        phone:document.getElementById('phone').value.trim(),
+        service:document.getElementById('service').value,
+        message:document.getElementById('message').value.trim()
+      };
+      const reEmail=/^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if(!reEmail.test(payload.email)){formMsg.textContent='Correo inválido.';return}
+      try{
+        const res=await fetch(BASE_URL+'/api/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+        if(res.ok){formMsg.textContent='¡Gracias! Te contactaremos pronto.'; form.reset();}
+        else {formMsg.textContent='No se pudo enviar. Inténtalo más tarde o contáctanos por WhatsApp.'}
+      } catch(err) { formMsg.textContent='Backend no disponible. Usa WhatsApp, por favor.' }
+    });
+  </script>
+</body>
+</html>
+"""
+<script>
+    // === CONFIG ===
+    const API_BASE = location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+      ? 'http://127.0.0.1:8000'
+      : ''; // en Docker/Nginx produc, /api se proxya: fetch('/api/...')
+  
+    // === DASHBOARD: ejemplo real con /api/metrics (lo simulamos por ahora) ===
+    // Si deseas que el backend entregue métricas reales, podemos añadir /api/metrics.
+    // De momento llenamos con fetch a una ruta inexistente y fallback a datos locales.
+  
+    const fallbackMetrics = {
+      itse: 80,   // %
+      pozo: 65,
+      mant: 90,
+      inc: 50
+    };
+  
+    async function loadMetrics() {
+      try {
+        const res = await fetch(`${API_BASE}/api/metrics`);
+        if (!res.ok) throw new Error('no metrics');
+        const data = await res.json();
+        applyBars(data);
+      } catch (e) {
+        applyBars(fallbackMetrics);
+      }
+    }
+  
+    function applyBars(m) {
+      const bars = document.querySelectorAll('.dashboard .bar');
+      const keys = ['itse','pozo','mant','inc'];
+      bars.forEach((bar, i) => {
+        const key = keys[i];
+        const pct = m[key] ?? 50;
+        bar.style.height = Math.max(5, Math.min(100, pct)) + '%';
+      });
+    }
+  
+    // === FORM LEADS (si tienes un form con id="contact-form") ===
+    // Si tu CTA solo linkea a WhatsApp, omite esto.
+    async function sendLead({name,email,phone,service,message}) {
+      const res = await fetch(`${API_BASE}/api/leads`, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({name,email,phone,service,message})
+      });
+      if (!res.ok) throw new Error('Lead error');
+      return res.json();
+    }
+  
+    // === CHATBOT mínimo (puedes conectar tus inputs si los tienes) ===
+    async function askBot(msg) {
+      const res = await fetch(`${API_BASE}/api/chat`, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({message: msg, use_ai: true})
+      });
+      if (!res.ok) throw new Error('Chat error');
+      const data = await res.json();
+      return data.reply;
+    }
+  
+    // === WhatsApp: armar mensaje con contexto del chat ===
+    function openWhatsApp(numberE164, text) {
+      const url = `https://api.whatsapp.com/send?phone=${encodeURIComponent(numberE164)}&text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank');
+    }
+  
+    // === Inicialización ===
+    document.addEventListener('DOMContentLoaded', () => {
+      loadMetrics();
+  
+      // Ejemplo: enganchar la CTA para armar un texto con contexto
+      const cta = document.querySelector('.cta');
+      if (cta) {
+        cta.addEventListener('click', (e) => {
+          // Si quieres que abra WhatsApp directamente con texto:
+          // e.preventDefault();
+          // const context = "Hola, vengo de la web y quiero una cotización ITSE.";
+          // openWhatsApp('51906315961', context);
+        });
+      }
+    });
+  </script>
+  

@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  backend:
+    build: ./backend
+    container_name: tesla-backend
+    env_file:
+      - ./backend/.env
+    ports: ["8000:8000"]
+    networks: [tesla_net]
+
+  frontend:
+    build: ./frontend
+    container_name: tesla-frontend
+    depends_on: [backend]
+    ports: ["80:80"]
+    networks: [tesla_net]
+
+networks:
+  tesla_net:
+    driver: bridge
