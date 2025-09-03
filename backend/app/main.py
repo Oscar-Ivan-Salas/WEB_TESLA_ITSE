@@ -41,7 +41,7 @@ app = FastAPI(
     openapi_url="/api/openapi.json"
 )
 
-# CORS middleware configuration
+# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=os.getenv("ALLOWED_ORIGINS", "*").split(","),
@@ -49,6 +49,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include API router
+app.include_router(api_router)
 
 # Trusted Hosts middleware
 app.add_middleware(
@@ -98,7 +101,7 @@ async def http_exception_handler(request, exc):
 
 # Add startup event to initialize data
 @app.on_event("startup")
-async def startup_event():
+def startup_event():
     """Initialize data when the application starts."""
     from .init_db import create_initial_data
     
@@ -106,7 +109,7 @@ async def startup_event():
     
     try:
         # Create initial data if needed
-        await create_initial_data()
+        create_initial_data()
         logger.info("Initial data check completed.")
     except Exception as e:
         logger.error(f"Error during startup: {e}")

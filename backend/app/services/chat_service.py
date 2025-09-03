@@ -10,7 +10,6 @@ from app.schemas.chat import (
     MessageCreate, MessageUpdate, ConversationCreate, 
     ConversationUpdate, ChatResponse
 )
-from app.core.security import get_password_hash
 
 class ChatService:
     """Service class for chat-related operations."""

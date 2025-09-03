@@ -45,6 +45,9 @@ class ActivityLog(Base):
         index=True
     )
     
+    # Relationships
+    user = relationship("User", back_populates="activities")
+
     # Additional details
     ip_address = Column(
         String(50),
