@@ -1,119 +1,119 @@
+"""
+Main FastAPI application for the Tesla CRM API.
+"""
 import os
-from typing import Optional
-from fastapi import FastAPI, HTTPException
+import logging
+from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel, EmailStr, Field
-from sqlalchemy import create_engine, text
-from sqlalchemy.orm import sessionmaker
-import httpx
+from fastapi.security import OAuth2PasswordBearer
+from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from starlette.middleware.sessions import SessionMiddleware
 from dotenv import load_dotenv
 
+# Load environment variables
 load_dotenv()
-AI_PROVIDER = os.getenv('AI_PROVIDER', 'none').lower()
-OPENAI_API_KEY = os.getenv('OPENAI_API_KEY')
-DB_URL = os.getenv('DB_URL', 'sqlite:///./tesla.db')
-ALLOWED_ORIGINS = [o.strip() for o in os.getenv('ALLOWED_ORIGINS', '*').split(',')]
 
-engine = create_engine(DB_URL, connect_args={'check_same_thread': False} if DB_URL.startswith('sqlite') else {})
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+# Import database and models to ensure tables are created
+from .database import engine, Base
+from .models import *  # noqa
 
-with engine.begin() as conn:
-    conn.exec_driver_sql(
-        '''
-        CREATE TABLE IF NOT EXISTS leads (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            email TEXT,
-            phone TEXT,
-            service TEXT,
-            message TEXT,
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-        )
-        '''
-    )
+# Import routers
+from .api.v1 import router as api_router
 
-app = FastAPI(title='Tesla CRM API')
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=['*'] if '*' in ALLOWED_ORIGINS else ALLOWED_ORIGINS,
-    allow_credentials=True,
-    allow_methods=['*'],
-    allow_headers=['*'],
+# Configure logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+# Create database tables
+Base.metadata.create_all(bind=engine)
+
+# OAuth2 scheme for token authentication
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="api/v1/auth/token")
+
+# Create FastAPI app
+app = FastAPI(
+    title="Tesla CRM API",
+    description="API for Tesla CRM application",
+    version="0.1.0",
+    docs_url="/api/docs",
+    redoc_url="/api/redoc",
+    openapi_url="/api/openapi.json"
 )
 
-class LeadIn(BaseModel):
-    name: str = Field(..., min_length=2)
-    email: Optional[EmailStr] = None
-    phone: str = Field(..., min_length=6)
-    service: Optional[str] = None
-    message: Optional[str] = None
+# CORS middleware configuration
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=os.getenv("ALLOWED_ORIGINS", "*").split(","),
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-class ChatIn(BaseModel):
-    message: str
-    use_ai: bool = True
+# Trusted Hosts middleware
+app.add_middleware(
+    TrustedHostMiddleware,
+    allowed_hosts=os.getenv("ALLOWED_HOSTS", "*").split("|"),
+)
 
-class ChatOut(BaseModel):
-    reply: str
+# Session middleware
+app.add_middleware(
+    SessionMiddleware,
+    secret_key=os.getenv("SECRET_KEY", "your-secret-key-here"),
+    session_cookie="tesla_session",
+)
 
-@app.get('/healthz')
-async def healthz():
-    return {'ok': True}
+# Include API routers
+app.include_router(api_router, prefix="/api/v1")
 
-@app.post('/api/leads')
-async def create_lead(payload: LeadIn):
-    if payload.name.lower().startswith('http'):
-        raise HTTPException(status_code=400, detail='Invalid name')
-    with engine.begin() as conn:
-        conn.execute(text(
-            'INSERT INTO leads(name,email,phone,service,message) '
-            'VALUES(:name,:email,:phone,:service,:message)'
-        ), payload.model_dump())
-    await notify_telegram(payload)
-    return {'ok': True}
+# Health check endpoint
+@app.get("/healthz", tags=["health"])
+async def health_check():
+    """Health check endpoint for load balancers and monitoring."""
+    return {
+        "status": "ok",
+        "version": "0.1.0",
+        "environment": os.getenv("ENV", "development"),
+    }
 
-async def notify_telegram(lead: LeadIn):
-    token = os.getenv('TELEGRAM_BOT_TOKEN')
-    chat_id = os.getenv('TELEGRAM_CHAT_ID')
-    if not token or not chat_id:
-        return
-    text_msg = (
-        f'Nuevo lead:\nNombre: {lead.name}\nEmail: {lead.email}\nTel: {lead.phone}\n'
-        f'Servicio: {lead.service}\nMensaje: {lead.message}'
+# Root endpoint
+@app.get("/", tags=["root"])
+async def root():
+    """Root endpoint that provides API information."""
+    return {
+        "name": "Tesla CRM API",
+        "version": "0.1.0",
+        "docs": "/api/docs",
+        "redoc": "/api/redoc"
+    }
+
+# Add exception handlers
+@app.exception_handler(HTTPException)
+async def http_exception_handler(request, exc):
+    """Handle HTTP exceptions with a JSON response."""
+    return JSONResponse(
+        status_code=exc.status_code,
+        content={"detail": exc.detail},
     )
-    url = f'https://api.telegram.org/bot{token}/sendMessage'
-    async with httpx.AsyncClient(timeout=10) as client:
-        try:
-            await client.post(url, json={'chat_id': chat_id, 'text': text_msg})
-        except Exception:
-            pass
 
-KEYS = {
-    'itse': ['itse','licencia','inspección','inspeccion'],
-    'pozo': ['pozo','tierra','puesta a tierra'],
-    'mant': ['mantenimiento','preventivo','correctivo'],
-    'inc':  ['incendio','incendios','alarma','detección','detector']
-}
+# Add startup event to initialize data
+@app.on_event("startup")
+async def startup_event():
+    """Initialize data when the application starts."""
+    from .init_db import create_initial_data
+    
+    logger.info("Starting up Tesla CRM API...")
+    
+    try:
+        # Create initial data if needed
+        await create_initial_data()
+        logger.info("Initial data check completed.")
+    except Exception as e:
+        logger.error(f"Error during startup: {e}")
+        raise
 
-def rule_based_reply(text: str) -> str:
-    t = text.lower()
-    if any(k in t for k in KEYS['itse']):
-        return ('ITSE: pago municipal aprox. S/ 218 y gestión desde S/ 300 (referencial). '
-                'Para precisión: rubro y área en m². ¿Agendamos visita técnica sin costo?')
-    if any(k in t for k in KEYS['pozo']):
-        return ('Pozo de tierra: S/ 1,500 – 2,500 (referencial, depende del terreno). '
-                'Podemos medir resistencia y proponer solución. ¿Dirección para visita?')
-    if any(k in t for k in KEYS['mant']):
-        return ('Mantenimiento: plan a medida (preventivo/correctivo). '
-                'Cuéntame tamaño del local y equipos críticos para estimar.')
-    if any(k in t for k in KEYS['inc']):
-        return ('Contra incendios: diseño, detección y alarma según normativa. '
-                'Costo depende del área y riesgo. ¿Qué tipo de propiedad es?')
-    return 'Gracias. Déjanos nombre y número para coordinar una visita técnica.'
-
-@app.post('/api/chat', response_model=ChatOut)
-async def chat_route(payload: ChatIn):
-    user = payload.message.strip()
-    if not user:
-        raise HTTPException(status_code=400, detail='Empty message')
-    rb = rule_based_reply(user)
-    return ChatOut(reply=rb)
+# Add shutdown event
+@app.on_event("shutdown")
+def shutdown_event():
+    """Clean up when the application shuts down."""
+    logger.info("Shutting down Tesla CRM API...")
